@@ -1,13 +1,16 @@
 package io.github.salmasouza.Vendas.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tbl_servico")
-public class Servico implements Serializable {
+public class ServicoPrestado implements Serializable {
 
     /**
      *
@@ -29,15 +32,20 @@ public class Servico implements Serializable {
     @Column(name = "servico_valor")
     private BigDecimal valor;
 
+    @Column(name ="servico_data")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate data;
 
-    public Servico() {
+
+    public ServicoPrestado() {
     }
 
-    public Servico(Long id, String descricao, Cliente cliente, BigDecimal valor) {
+    public ServicoPrestado(Long id, String descricao, Cliente cliente, BigDecimal valor, LocalDate data) {
         this.id = id;
         this.descricao = descricao;
         this.cliente = cliente;
         this.valor = valor;
+        this.data = data;
     }
 
     public Long getId() {
@@ -72,26 +80,30 @@ public class Servico implements Serializable {
         this.valor = valor;
     }
 
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Servico servico = (Servico) o;
+        ServicoPrestado servico = (ServicoPrestado) o;
         return Objects.equals(id, servico.id);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
     public String toString() {
-        return "Servico{" +
+        return "ServicoPrestado{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
                 ", cliente=" + cliente +
                 ", valor=" + valor +
+                ", data=" + data +
                 '}';
     }
 }
