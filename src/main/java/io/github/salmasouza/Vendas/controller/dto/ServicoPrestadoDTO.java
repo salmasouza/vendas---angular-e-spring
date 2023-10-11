@@ -1,14 +1,22 @@
 package io.github.salmasouza.Vendas.controller.dto;
 
+import org.springframework.data.repository.query.Param;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class ServicoPrestadoDTO {
 
-    private String descricao;
-    private String preco;
 
+    @NotEmpty(message = "{campo.descricao.obrigatorio}")
+    private String descricao;
+    @NotEmpty(message = "{campo.preco.obrigatorio}")
+    private String preco;
+    @NotEmpty(message = "{campo.data.obrigatorio}")
     private String data;
 
+    @NotNull(message = "{campo.cliente.obrigatorio}")
     private Long idCliente;
 
     public ServicoPrestadoDTO() {
