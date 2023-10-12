@@ -1,6 +1,7 @@
 package io.github.salmasouza.Vendas.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,8 +20,10 @@ public class Usuario implements Serializable {
     private Long id;
 
     @Column(unique = true,name = "login")
+    @NotEmpty(message = "{campo.login.obrigatorio}")
     private String username;
     @Column(name = "senha")
+    @NotEmpty(message = "{campo.senha.obrigatorio}")
     private String password;
 
     public Usuario() {
